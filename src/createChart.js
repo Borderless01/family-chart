@@ -28,7 +28,7 @@ function CreateChart(cont, data) {
 
   this.init(cont, data)
 
-  return this
+  return this 
 }
 
 CreateChart.prototype.init = function(cont, data) {
