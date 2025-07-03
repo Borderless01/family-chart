@@ -1,0 +1,12 @@
+FROM node:alpine AS development
+ENV NODE_ENV development
+WORKDIR /family-chart
+
+COPY ./package*.json /family-chart
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm","run","dev"]

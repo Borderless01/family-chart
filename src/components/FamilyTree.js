@@ -1,0 +1,306 @@
+'use client';
+
+import React from "react";
+import f3 from 'family-chart';  // npm install family-chart@0.7.0 or yarn add family-chart@0.7.0
+import 'family-chart/styles/family-chart.css';
+
+export default class FamilyTree extends React.Component {
+  cont = React.createRef();
+
+  componentDidMount() {
+    if (!this.cont.current) return;
+    
+    create(data())
+
+    function create(data) {
+      const f3Chart = f3.createChart('#FamilyChart', data)
+        .setTransitionTime(1000)
+        .setCardXSpacing(250)
+        .setCardYSpacing(150)
+        .setSingleParentEmptyCard(true, {label: 'ADD'})
+        .setShowSiblingsOfMain(false)
+        .setOrientationVertical()
+    
+      const f3Card = f3Chart.setCard(f3.CardHtml)
+        .setCardDisplay([["first name","last name"],["birthday"]])
+        .setCardDim({})
+        .setMiniTree(true)
+        .setStyle('imageRect')
+        .setOnHoverPathToMain()
+    
+      
+      const f3EditTree = f3Chart.editTree()
+        .fixed(true)
+        .setFields(["first name","last name","birthday","avatar"])
+        .setEditFirst(true)
+        .setCardClickOpen(f3Card)
+      
+      f3EditTree.setEdit()
+    
+      f3Chart.updateTree({initial: true})
+      f3EditTree.open(f3Chart.getMainDatum())
+    
+      f3Chart.updateTree({initial: true})
+    }
+    
+    function data() {
+      return [
+        {
+          "id": "0",
+          "rels": {
+            "father": "1118da0c-e2fe-4b60-ae16-b99c68063945",
+            "mother": "057f6b6c-3d74-463d-ab08-9d5777ac6e7d",
+            "spouses": [],
+            "children": []
+          },
+          "data": {
+            "gender": "M"
+          },
+          "unknown": true
+        },
+        {
+          "id": "1118da0c-e2fe-4b60-ae16-b99c68063945",
+          "data": {
+            "gender": "M",
+            "first name": "Paulin Abate Kouegan",
+            "last name": "Klutse",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "children": [
+              "0",
+              "c20aa6f4-4625-46ac-b12c-93826fbf5eb5",
+              "0406aa6a-8d91-41f9-be7e-c965789db2cb",
+              "890010ae-51ec-4a87-933d-bfde90f84c05",
+              "c846583c-6f73-4f40-b0dd-f2a73bc9c024"
+            ],
+            "spouses": [
+              "057f6b6c-3d74-463d-ab08-9d5777ac6e7d",
+              "13dd2d05-04b4-44ea-89b8-21b5e266860c",
+              "87fd43b4-b064-42a7-9782-aa30f1fef71c",
+              "92f91e8b-e333-4ca8-ae2a-809e9b9ecfe4",
+              "805bd476-b30e-48ac-ae2f-081317694aa1",
+              "72927a03-cd3e-4e7e-bcff-f60c7b9391d2",
+              "62eda10c-e028-4ef8-a89d-480bbfcea690",
+              "d4e80c7b-8226-42d6-9736-469731b1d9a9",
+              "d481a39b-b029-49a4-9587-7b21ceb9a4da"
+            ]
+          }
+        },
+        {
+          "id": "057f6b6c-3d74-463d-ab08-9d5777ac6e7d",
+          "data": {
+            "gender": "F",
+            "first name": "Elizabeth Anti",
+            "last name": "Neku",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "children": [
+              "0"
+            ],
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ]
+          }
+        },
+        {
+          "id": "13dd2d05-04b4-44ea-89b8-21b5e266860c",
+          "data": {
+            "gender": "F",
+            "first name": "Jeanne",
+            "last name": "Nyaletassi",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "87fd43b4-b064-42a7-9782-aa30f1fef71c",
+          "data": {
+            "gender": "F",
+            "first name": "Angele",
+            "last name": "Kapou",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "92f91e8b-e333-4ca8-ae2a-809e9b9ecfe4",
+          "data": {
+            "gender": "F",
+            "first name": "Gamele",
+            "last name": "Azansou",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "805bd476-b30e-48ac-ae2f-081317694aa1",
+          "data": {
+            "gender": "F",
+            "first name": "Antoinette Abra",
+            "last name": "Hediamele",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "72927a03-cd3e-4e7e-bcff-f60c7b9391d2",
+          "data": {
+            "gender": "F",
+            "first name": "Louise",
+            "last name": "Adoboe",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "62eda10c-e028-4ef8-a89d-480bbfcea690",
+          "data": {
+            "gender": "F",
+            "first name": "Emma Adjoa",
+            "last name": "Mensakloe",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "d4e80c7b-8226-42d6-9736-469731b1d9a9",
+          "data": {
+            "gender": "F",
+            "first name": "Akossiwa ",
+            "last name": "Adzor",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": []
+          }
+        },
+        {
+          "id": "d481a39b-b029-49a4-9587-7b21ceb9a4da",
+          "data": {
+            "gender": "F",
+            "first name": "Marie Afoua",
+            "last name": "Tenge",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "spouses": [
+              "1118da0c-e2fe-4b60-ae16-b99c68063945"
+            ],
+            "children": [
+              "c20aa6f4-4625-46ac-b12c-93826fbf5eb5",
+              "0406aa6a-8d91-41f9-be7e-c965789db2cb",
+              "890010ae-51ec-4a87-933d-bfde90f84c05",
+              "c846583c-6f73-4f40-b0dd-f2a73bc9c024"
+            ]
+          }
+        },
+        {
+          "id": "c20aa6f4-4625-46ac-b12c-93826fbf5eb5",
+          "data": {
+            "gender": "M",
+            "first name": "Andre",
+            "last name": "Klutse",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "father": "1118da0c-e2fe-4b60-ae16-b99c68063945",
+            "mother": "d481a39b-b029-49a4-9587-7b21ceb9a4da"
+          }
+        },
+        {
+          "id": "0406aa6a-8d91-41f9-be7e-c965789db2cb",
+          "data": {
+            "gender": "M",
+            "first name": "Antoine",
+            "last name": "Klutse",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "father": "1118da0c-e2fe-4b60-ae16-b99c68063945",
+            "mother": "d481a39b-b029-49a4-9587-7b21ceb9a4da"
+          }
+        },
+        {
+          "id": "890010ae-51ec-4a87-933d-bfde90f84c05",
+          "data": {
+            "gender": "F",
+            "first name": "Mawulawoe",
+            "last name": "Klutse",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "father": "1118da0c-e2fe-4b60-ae16-b99c68063945",
+            "mother": "d481a39b-b029-49a4-9587-7b21ceb9a4da"
+          }
+        },
+        {
+          "id": "c846583c-6f73-4f40-b0dd-f2a73bc9c024",
+          "data": {
+            "gender": "M",
+            "first name": "Raymond",
+            "last name": "Klutse",
+            "birthday": "",
+            "avatar": ""
+          },
+          "rels": {
+            "father": "1118da0c-e2fe-4b60-ae16-b99c68063945",
+            "mother": "d481a39b-b029-49a4-9587-7b21ceb9a4da"
+          }
+        }
+      ]
+    }
+
+  }
+
+  render() {
+    return <div className="f3 f3-cont" id="FamilyChart" ref={this.cont}></div>;
+  }
+}
