@@ -10,7 +10,7 @@ export default class FamilyTree extends React.Component {
   componentDidMount() {
     if (!this.cont.current) return;
     
-    fetch('/data/data.json')
+    fetch('/api/family')
       .then(res => res.json())
       .then(data => create(data))
       .catch(err => console.error('Failed to load family data:', err))
@@ -39,29 +39,44 @@ export default class FamilyTree extends React.Component {
         .setCardClickOpen(f3Card)
       
       f3EditTree.setEdit()
-      
-      // f3Chart.onUpdateTree((newTreeData) => {
-      //   fetch('/api/save-family', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(newTreeData),
-      //   }).then(res => {
-      //     if (!res.ok) {
-      //       console.error('Failed to save family tree');
-      //     }
-      //   });
-      // });
-    
+
       f3Chart.updateTree({initial: true})
       f3EditTree.open(f3Chart.getMainDatum())
     
       f3Chart.updateTree({initial: true})
+      window.f3Chart = f3Chart;
     }
   }
-  
+
+  saveFamilyTree = () => {
+    const chart = window.f3Chart;
+    if (!chart) {
+      alert('Family tree chart is not ready.');
+      return;
+    }
+    const dataToSave = chart.getData ? chart.getData() : chart.store.getData();
+    fetch('/api/family', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSave),
+    })
+    .then(res => {
+      if (!res.ok) {
+        alert('Failed to save family tree');
+      } else {
+        alert('Family tree saved successfully!');
+      }
+    });
+  }
+
   render()  {
-    return <div className="f3 f3-cont" id="FamilyChart" ref={this.cont}></div>;
+    return (
+      <>
+        <button onClick={this.saveFamilyTree}>Save Tree</button>
+        <div className="f3 f3-cont" id="FamilyChart" ref={this.cont}></div>
+      </>
+    )
   }
 }
